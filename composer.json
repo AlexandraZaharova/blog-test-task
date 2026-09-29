@@ -1,0 +1,12 @@
+{
+    "name": "you/blog-test",
+    "authors": [
+        {
+            "name": "Alexandra Zakharova",
+            "email": "zakharova911@gmail.com"
+        }
+    ],
+    "require": {
+        "smarty/smarty": "^5.8"
+    }
+}

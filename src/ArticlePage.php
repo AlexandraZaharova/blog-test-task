@@ -40,13 +40,14 @@ class ArticlePage
         $pdo = Database::connection();
 
         $stmt = $pdo->prepare(
-            'SELECT DISTINCT a.id, a.title, a.description
+            'SELECT DISTINCT a.id, a.title, a.description, a.published_at
              FROM articles a
              JOIN article_category ac ON ac.article_id = a.id
              WHERE ac.category_id IN (
                  SELECT category_id FROM article_category WHERE article_id = ?
              )
              AND a.id != ?
+             ORDER BY a.published_at DESC
              LIMIT 3'
         );
         $stmt->execute([$articleId, $articleId]);

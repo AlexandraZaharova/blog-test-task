@@ -6,6 +6,7 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../src/Database.php';
 require __DIR__ . '/../src/Category.php';
 require __DIR__ . '/../src/CategoryPage.php';
+require __DIR__ . '/../src/ArticlePage.php';
 
 $smarty = new Smarty();
 $smarty->setTemplateDir(__DIR__ . '/../templates');
@@ -40,7 +41,19 @@ switch ($page) {
         $smarty->display('category.tpl');
         break;
     case 'post':
-        echo 'Страница статьи (день 4)';
+        $articleId = (int) ($_GET['id'] ?? 0);
+
+        $article = ArticlePage::load($articleId);
+
+        if ($article === null) {
+            http_response_code(404);
+            echo 'Статья не найдена';
+            break;
+        }
+
+        $smarty->assign('article', $article['article']);
+        $smarty->assign('similar', $article['similar']);
+        $smarty->display('post.tpl');
         break;
     default:
         http_response_code(404);

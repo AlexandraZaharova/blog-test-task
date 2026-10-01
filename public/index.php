@@ -5,6 +5,7 @@ use Smarty\Smarty;
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../src/Database.php';
 require __DIR__ . '/../src/Category.php';
+require __DIR__ . '/../src/CategoryPage.php';
 
 $smarty = new Smarty();
 $smarty->setTemplateDir(__DIR__ . '/../templates');
@@ -19,7 +20,24 @@ switch ($page) {
         $smarty->display('home.tpl');
         break;
     case 'category':
-        echo 'Страница категории (день 3)';
+        $categoryId = (int) ($_GET['id'] ?? 0);
+        $sort = $_GET['sort'] ?? 'date';
+        $pageNum = max(1, (int) ($_GET['p'] ?? 1));
+
+        $data = CategoryPage::load($categoryId, $sort, $pageNum);
+
+        if ($data === null) {
+            http_response_code(404);
+            echo 'Категория не найдена';
+            break;
+        }
+
+        $smarty->assign('category', $data['category']);
+        $smarty->assign('articles', $data['articles']);
+        $smarty->assign('sort', $sort);
+        $smarty->assign('currentPage', $pageNum);
+        $smarty->assign('totalPages', $data['totalPages']);
+        $smarty->display('category.tpl');
         break;
     case 'post':
         echo 'Страница статьи (день 4)';

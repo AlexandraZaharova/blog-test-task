@@ -23,9 +23,10 @@ switch ($page) {
     case 'category':
         $categoryId = (int) ($_GET['id'] ?? 0);
         $sort = $_GET['sort'] ?? 'date';
+        $direction = $_GET['dir'] ?? 'desc';
         $pageNum = max(1, (int) ($_GET['p'] ?? 1));
 
-        $data = CategoryPage::load($categoryId, $sort, $pageNum);
+        $data = CategoryPage::load($categoryId, $sort, $direction, $pageNum);
 
         if ($data === null) {
             http_response_code(404);
@@ -36,6 +37,7 @@ switch ($page) {
         $smarty->assign('category', $data['category']);
         $smarty->assign('articles', $data['articles']);
         $smarty->assign('sort', $sort);
+        $smarty->assign('direction', $direction);
         $smarty->assign('currentPage', $pageNum);
         $smarty->assign('totalPages', $data['totalPages']);
         $smarty->display('category.tpl');

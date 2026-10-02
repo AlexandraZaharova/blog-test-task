@@ -2,11 +2,18 @@
     <h1>{$category.name}</h1>
     <p>{$category.description}</p>
 
+    {assign var="dateDir" value=($sort == 'date' && $direction == 'desc') ? 'asc' : 'desc'}
+    {assign var="viewsDir" value=($sort == 'views' && $direction == 'desc') ? 'asc' : 'desc'}
+
     <div>
         Сортировать:
-        <a href="/index.php?page=category&id={$category.id}&sort=date">по дате</a>
+        <a href="/index.php?page=category&id={$category.id}&sort=date&dir={$dateDir}">
+            по дате {if $sort == 'date'}{if $direction == 'desc'}↓{else}↑{/if}{/if}
+        </a>
         |
-        <a href="/index.php?page=category&id={$category.id}&sort=views">по просмотрам</a>
+        <a href="/index.php?page=category&id={$category.id}&sort=views&dir={$viewsDir}">
+            по просмотрам {if $sort == 'views'}{if $direction == 'desc'}↓{else}↑{/if}{/if}
+        </a>
     </div>
 
     <ul>
@@ -24,7 +31,7 @@
             {if $p == $currentPage}
                 <strong>{$p}</strong>
             {else}
-                <a href="/index.php?page=category&id={$category.id}&sort={$sort}&p={$p}">{$p}</a>
+                <a href="/index.php?page=category&id={$category.id}&sort={$sort}&dir={$direction}&p={$p}">{$p}</a>
             {/if}
         {/for}
     </div>

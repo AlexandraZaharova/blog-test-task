@@ -4,7 +4,7 @@ class CategoryPage
 {
     private const PER_PAGE = 3;
 
-    public static function load(int $categoryId, string $sort, int $page): ?array
+    public static function load(int $categoryId, string $sort, string $direction, int $page): ?array
     {
         $pdo = Database::connection();
 
@@ -16,10 +16,12 @@ class CategoryPage
             return null;
         }
 
-        $orderBy = match ($sort) {
-            'views' => 'a.views DESC',
-            default => 'a.published_at DESC',
+        $column = match ($sort) {
+            'views' => 'a.views',
+            default => 'a.published_at',
         };
+
+        $direction = strtoupper($direction) === 'ASC' ? 'ASC' : 'DESC';
 
         $countStmt = $pdo->prepare(
             'SELECT COUNT(*) FROM articles a
@@ -37,7 +39,7 @@ class CategoryPage
              FROM articles a
              JOIN article_category ac ON ac.article_id = a.id
              WHERE ac.category_id = ?
-             ORDER BY {$orderBy}
+             ORDER BY {$column} {$direction}
              LIMIT " . self::PER_PAGE . " OFFSET {$offset}"
         );
         $articlesStmt->execute([$categoryId]);

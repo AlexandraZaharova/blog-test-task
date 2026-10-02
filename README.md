@@ -16,13 +16,15 @@
 1. Установить [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 2. Клонировать репозиторий и перейти в папку проекта
 3. Запустить:
-   \`\`\`bash
-   docker compose up --build
-   \`\`\`
-4. В отдельном окне терминала засеять базу тестовыми данными:
-   \`\`\`bash
+   ```bash
+   docker compose up --build -d
+   ```
+4. Засеять базу тестовыми данными:
+
+   ```bash
    docker compose exec php php src/seed.php
-   \`\`\`
+   ```
+
 5. Открыть `http://localhost:8000/index.php?page=home`
 
 ### Вариант B — локально, без Docker
@@ -32,19 +34,21 @@
 **Установка зависимостей по ОС:**
 
 **macOS (Homebrew):**
-\`\`\`bash
+
+```bash
 brew install php mysql composer
 brew services start mysql
-\`\`\`
+```
 
 **Ubuntu / Debian:**
-\`\`\`bash
+
+```bash
 sudo apt update
 sudo apt install php php-mysql php-mbstring mysql-server
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 sudo systemctl start mysql
-\`\`\`
+```
 
 **Windows:**
 
@@ -56,23 +60,23 @@ sudo systemctl start mysql
 
 1. Клонировать репозиторий и перейти в папку проекта
 2. Установить зависимости:
-   \`\`\`bash
+   ```bash
    composer install
-   \`\`\`
+   ```
 3. Создать базу данных:
-   \`\`\`bash
+   ```bash
    mysql -u root -p -e "CREATE DATABASE blog_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
    mysql -u root -p blog_test < config/schema.sql
-   \`\`\`
+   ```
 4. Настроить подключение к БД в `config/database.php` (логин/пароль от вашей локальной MySQL)
 5. Заполнить тестовыми данными:
-   \`\`\`bash
+   ```bash
    php src/seed.php
-   \`\`\`
+   ```
 6. Запустить сервер:
-   \`\`\`bash
+   ```bash
    php -S localhost:8000 -t public
-   \`\`\`
+   ```
 7. Открыть `http://localhost:8000/index.php?page=home`
 
 ## Структура

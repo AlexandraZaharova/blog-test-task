@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Блог — Главная</title>
-</head>
-<body>
+{capture name="content"}
     <h1>Блог</h1>
 
     {foreach $categories as $category}
@@ -25,5 +19,6 @@
             <a href="/index.php?page=category&id={$category.id}">Все статьи →</a>
         </section>
     {/foreach}
-</body>
-</html>
+{/capture}
+{assign var="content" value=$smarty.capture.content}
+{include file="layout.tpl"}

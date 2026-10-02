@@ -1,0 +1,31 @@
+$primary: #2f6f60;
+$text: #1e2b36;
+$muted: #8395a3;
+
+body {
+  font-family: system-ui, sans-serif;
+  color: $text;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  line-height: 1.6;
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+section {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+small {
+  color: $muted;
+}

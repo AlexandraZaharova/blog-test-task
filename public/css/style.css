@@ -1,0 +1,28 @@
+body {
+  font-family: system-ui, sans-serif;
+  color: #1e2b36;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  line-height: 1.6;
+}
+
+a {
+  color: #2f6f60;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+section {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+small {
+  color: #8395a3;
+}
+
+/*# sourceMappingURL=style.css.map */

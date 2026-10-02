@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>{$article.title} — Блог</title>
-</head>
-<body>
-    <a href="/index.php?page=home">← На главную</a>
-
+{capture name="content"}
     <article>
         {if $article.image}
             <img src="{$article.image}" alt="{$article.title}">
@@ -34,5 +26,6 @@
             </ul>
         </section>
     {/if}
-</body>
-</html>
+{/capture}
+{assign var="content" value=$smarty.capture.content}
+{include file="layout.tpl"}

@@ -1,37 +1,29 @@
 <?php
-/* Smarty version 5.8.4, created on 2026-10-01 20:16:51
+/* Smarty version 5.8.4, created on 2026-10-02 10:42:10
   from 'file:category.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.8.4',
-  'unifunc' => 'content_6abebfb396c5c7_73174705',
+  'unifunc' => 'content_6abf8a82dd7c52_07581298',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'adc2150bb4c87295a9aa74864620dfb1fc677c77' => 
     array (
       0 => 'category.tpl',
-      1 => 1790885763,
+      1 => 1790937710,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
+    'file:layout.tpl' => 1,
   ),
 ))) {
-function content_6abebfb396c5c7_73174705 (\Smarty\Template $_smarty_tpl) {
+function content_6abf8a82dd7c52_07581298 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Users/shota/Desktop/blog-test/templates';
-?><!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title><?php echo $_smarty_tpl->getValue('category')['name'];?>
- — Блог</title>
-</head>
-<body>
-    <a href="/index.php?page=home">← На главную</a>
-
+$_smarty_tpl->getSmarty()->getRuntime('Capture')->open($_smarty_tpl, "content", null, null);?>
     <h1><?php echo $_smarty_tpl->getValue('category')['name'];?>
 </h1>
     <p><?php echo $_smarty_tpl->getValue('category')['description'];?>
@@ -88,6 +80,8 @@ $_smarty_tpl->getVariable('p')->first = $_smarty_tpl->getVariable('p')->iteratio
 }
 ?>
     </div>
-</body>
-</html><?php }
+<?php $_smarty_tpl->getSmarty()->getRuntime('Capture')->close($_smarty_tpl);
+$_smarty_tpl->assign('content', $_smarty_tpl->getSmarty()->getRuntime('Capture')->getBuffer($_smarty_tpl, 'content'), false, NULL);
+$_smarty_tpl->renderSubTemplate("file:layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+}
 }

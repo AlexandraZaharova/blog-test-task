@@ -1,10 +1,8 @@
-version: "3.8"
-
 services:
   php:
     build: .
     volumes:
-      - .:/app
+      - .:/app:rw
     working_dir: /app
     command: php -S 0.0.0.0:8000 -t public
     ports:
@@ -20,6 +18,10 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: blog_test
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - ./config/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
